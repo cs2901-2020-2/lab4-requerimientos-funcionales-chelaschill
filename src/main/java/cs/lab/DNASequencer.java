@@ -12,7 +12,7 @@ public class  DNASequencer {
 
     public String calculate(List<String> part){
 
-        String output = "AGA";
+        String output = "";
         int index = 0;
 
         for(int i = 0; i < part.size(); i++){
