@@ -11,6 +11,19 @@ public class  DNASequencer {
     }
 
     public String calculate(List<String> part){
-        return "AGATTACAGA";
+
+        String output = "";
+
+        for(int i = 0; i < part.size(); i++){
+            for(int j = 0; j < part.get(i).length(); j++){
+                if(output.contains(part.get(i))) {
+                }
+                else{
+                    output += part.get(i).charAt(j);
+                }
+            }
+        }
+
+        return output;
     }
 }
