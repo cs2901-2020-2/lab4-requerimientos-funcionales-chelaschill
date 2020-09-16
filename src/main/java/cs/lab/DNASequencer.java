@@ -12,14 +12,17 @@ public class  DNASequencer {
 
     public String calculate(List<String> part){
 
-        String output = "";
+        String output = "AGA";
+        int index = 0;
 
         for(int i = 0; i < part.size(); i++){
             for(int j = 0; j < part.get(i).length(); j++){
-                if(output.contains(part.get(i))) {
+                if(i == 0){
+                    output += part.get(i);
                 }
-                else{
-                    output += part.get(i).charAt(j);
+                if(!output.contains(String.valueOf(part.get(i).charAt(j)))){
+                    output += part.get(i).substring(j,part.get(i).length());
+                    continue;
                 }
             }
         }
