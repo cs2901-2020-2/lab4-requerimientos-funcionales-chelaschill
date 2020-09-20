@@ -10,23 +10,28 @@ public class  DNASequencer {
         logger.info("Starting sequencer...");
     }
 
-    public String calculate(List<String> part){
+    public void iThStringTooLong(String subseg) throws SubsequenceListSizeException {
+        if(subseg.length() > 200){
+            throw new SubsequenceListSizeException("The subseg string is too long");
+        }
+    }
 
-        String output = "";
-        int index = 0;
-
-        for(int i = 0; i < part.size(); i++){
-            for(int j = 0; j < part.get(i).length(); j++){
-                if(i == 0){
-                    output += part.get(i);
-                }
-                if(!output.contains(String.valueOf(part.get(i).charAt(j)))){
-                    output += part.get(i).substring(j,part.get(i).length());
-                    continue;
+    public  String calculate(List<String> parts) throws Exception{
+        if(parts.size() > 160000){
+            throw new SubsequenceLengthException("Too many subseqs");
+        }
+        iThStringTooLong(parts.get(0));
+        StringBuilder finalString = new StringBuilder(parts.get(0));
+        for (int i = 1; i < parts.size(); i++) {
+            StringBuilder subsequence = new StringBuilder();
+            iThStringTooLong(parts.get(i));
+            for (int j = 0; j < parts.get(i).length(); j++) {
+                subsequence.append(Character.toString(parts.get(i).charAt(j)));
+                if (!finalString.toString().contains(subsequence)) {
+                    finalString.append(Character.toString(parts.get(i).charAt(j)));
                 }
             }
         }
-
-        return output;
+        return finalString.toString();
     }
 }
